@@ -359,6 +359,52 @@
   }
   .visit-link:hover { color: var(--deep-cyan); border-color: var(--deep-cyan); }
 
+  /* Promo CTA on success page */
+  .promo-block {
+    margin: 22px 0 8px;
+    padding: 22px 18px 20px;
+    background: linear-gradient(135deg, #FFF5F7 0%, #FFE6EA 100%);
+    border-radius: 16px;
+    text-align: center;
+    border: 2px dashed var(--fr-red);
+    position: relative;
+  }
+  .promo-tag {
+    display: inline-block;
+    background: var(--fr-red);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(239, 65, 53, 0.30);
+  }
+  .promo-text {
+    font-size: 15px;
+    color: var(--charcoal);
+    line-height: 1.45;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .cta-btn {
+    display: block;
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--fr-red);
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    box-shadow: 0 4px 14px rgba(239, 65, 53, 0.30);
+    transition: background 0.15s, transform 0.1s;
+  }
+  .cta-btn:hover  { background: #D32F2F; }
+  .cta-btn:active { transform: translateY(1px); }
+
   .powered {
     margin-top: 20px;
     text-align: center;
@@ -523,6 +569,19 @@
     <div class="info-row"><span class="dot"></span>Drawn on the last day of the expo</div>
     <div class="info-row"><span class="dot"></span>We'll email you if you win</div>
     <div class="info-row"><span class="dot"></span>Stand 1.1 — 10 · come say hi!</div>
+
+    <!-- ===== Doctor sign-up promo CTA ===== -->
+    <div class="promo-block">
+      <div class="promo-tag">★ SPECIAL DOCTOR OFFER ★</div>
+      <p class="promo-text">
+        Register now and ask for your special<br/>
+        promotional offer on your first case.
+      </p>
+      <a class="cta-btn" href="https://dashboard.bloomaligner.fr/sign-up-doctor"
+         target="_blank" rel="noopener">
+        REGISTER AS A DOCTOR  →
+      </a>
+    </div>
 
     <a class="visit-link" href="https://bloomaligner.fr" target="_blank" rel="noopener">
       Discover the full Bloom story →
