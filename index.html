@@ -541,8 +541,8 @@
   // ============================================================
   // SUPABASE CONFIG — fill these in before deploying
   // ============================================================
-  const SUPABASE_URL = "https://https://zmgewujgarzdtafzsdfg.supabase.co";
-  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InptZ2V3dWpnYXJ6ZHRhZnpzZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMzIxOTQsImV4cCI6MjA5MzgwODE5NH0.uY6C7XRJdcs6rTF2GfdyIpTjuiqhB7LrJRWF9rVjYw4";
+  const SUPABASE_URL = "https://zmgewujgarzdtafzsdfg.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_Qi0w7LqM0f9vKk46qQDhjQ_lYwXiWTz";
   // ============================================================
 
   const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -617,40 +617,33 @@
     submitBtn.textContent = 'SUBMITTING…';
 
     try {
-      // Try insert; if duplicate email, look up existing entry and show that number
-      let { data, error } = await sb
-        .from('raffle_entries')
-        .insert(payload)
-        .select('entry_number')
-        .single();
+      // Use SECURITY DEFINER RPC: handles insert + dedupe in one call,
+      // bypassing the "anon can INSERT but not SELECT" RLS gotcha.
+      const { data: entryNumber, error } = await sb.rpc('submit_raffle_entry', {
+        p_full_name:      payload.full_name,
+        p_email:          payload.email,
+        p_specialization: payload.specialization,
+        p_phone:          payload.phone,
+        p_clinic_name:    payload.clinic_name,
+        p_country:        payload.country,
+      });
 
-      if (error) {
-        // Postgres unique-violation code
-        if (error.code === '23505') {
-          // Look up existing entry by email via RPC (defined in schema.sql)
-          const lookup = await sb.rpc('lookup_raffle_number_by_email', {
-            p_email: payload.email
-          });
-          if (lookup.error || lookup.data == null) {
-            showError("You're already registered with this email. Please check your inbox.");
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'GET MY RAFFLE NUMBER';
-            return;
-          }
-          data = { entry_number: lookup.data };
-        } else {
-          throw error;
-        }
-      }
+      if (error) throw error;
+      if (entryNumber == null) throw new Error('No entry number returned');
 
       // Success — show raffle number
-      raffleNumberEl.textContent = formatNumber(data.entry_number);
+      raffleNumberEl.textContent = formatNumber(entryNumber);
       formState.classList.add('hide');
       successState.classList.add('show');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
-      console.error(err);
-      showError('Could not submit right now. Please try again or come visit our stand.');
+      console.error('Raffle submit error:', err);
+      const msg = err && err.message ? err.message : '';
+      if (msg.includes('missing_required_fields')) {
+        showError('Please fill in all required fields.');
+      } else {
+        showError('Could not submit right now. Please try again or come visit our stand.');
+      }
       submitBtn.disabled = false;
       submitBtn.textContent = 'GET MY RAFFLE NUMBER';
     }
