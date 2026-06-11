@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bloom Aligner · Events</title>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🎁</text></svg>" />
+<style>
+  :root { --cyan:#22d3ee; --bg:#070d18; --card:#0d1626; --muted:#7c8aa5; --text:#e6edf7; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    min-height:100vh; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    display:flex; align-items:center; justify-content:center; padding:28px 16px;
+    background-image:radial-gradient(800px 400px at 50% -10%, rgba(34,211,238,.12), transparent 70%);
+  }
+  .wrap { width:100%; max-width:560px; text-align:center; }
+  .brand { font-size:30px; font-weight:800; letter-spacing:.5px; }
+  .brand .accent { color:var(--cyan); }
+  .brand-tag { color:var(--muted); font-size:13px; letter-spacing:2px; text-transform:uppercase; margin-top:6px; }
+  .fr-badge {
+    display:inline-block; margin-top:14px; padding:4px 12px; border-radius:999px;
+    border:1px solid rgba(34,211,238,.4); color:var(--cyan); font-size:11px; letter-spacing:1.5px; font-weight:700;
+  }
+  h2 { margin:34px 0 18px; font-size:17px; color:var(--muted); font-weight:600; }
+  .events { display:flex; flex-direction:column; gap:14px; }
+  a.event-card {
+    display:flex; align-items:center; gap:16px; text-decoration:none; color:var(--text);
+    background:var(--card); border:1px solid rgba(124,138,165,.25); border-radius:16px;
+    padding:18px 20px; transition:border-color .15s, transform .15s; text-align:left;
+  }
+  a.event-card:hover { border-color:var(--cyan); transform:translateY(-2px); }
+  .flag { font-size:34px; line-height:1; }
+  .ev-name { font-size:18px; font-weight:800; }
+  .ev-sub { color:var(--muted); font-size:13px; margin-top:3px; }
+  .ev-prize { color:var(--cyan); font-size:13px; font-weight:700; margin-top:4px; }
+  .arrow { margin-left:auto; color:var(--cyan); font-size:22px; }
+  .soon { opacity:.55; pointer-events:auto; }
+  .footer { margin-top:40px; color:var(--muted); font-size:11px; letter-spacing:1px; }
+  .footer a { color:var(--muted); text-decoration:none; }
+  .footer a:hover { color:var(--cyan); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">Win with <span class="accent">Bloom!</span></div>
+    <div class="brand-tag">Premium Clear Aligners</div>
+    <div class="fr-badge">FRENCH-MADE</div>
+
+    <h2>Choose your event · Choisissez votre événement</h2>
+
+    <div class="events">
+      <a class="event-card" href="./marrakech/">
+        <span class="flag">🇲🇦</span>
+        <span>
+          <span class="ev-name">Marrakech</span>
+          <div class="ev-sub">13.06.2026</div>
+          <div class="ev-prize">Win a FREE Bloom Aligner case</div>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="event-card" href="./tunis/">
+        <span class="flag">🇹🇳</span>
+        <span>
+          <span class="ev-name">Tunis</span>
+          <div class="ev-sub">2026</div>
+          <div class="ev-prize">Win a FREE Bloom Aligner case</div>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <div class="footer">
+      CEDARWINGS SAS · <a href="https://bloomaligner.fr" target="_blank" rel="noopener">BLOOMALIGNER.FR</a> · MADE IN FRANCE
+      &nbsp;·&nbsp; <a href="./admin/">admin</a>
+    </div>
+  </div>
+</body>
+</html>
